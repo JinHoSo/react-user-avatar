@@ -60,22 +60,18 @@ class UserAvatar extends React.Component {
     }
 
     let inner, classes = [className, 'UserAvatar'];
-    if (src || srcset) {
-      inner = <img className="UserAvatar--img" style={imageStyle} src={src} srcSet={srcset} alt={name} />
+    let background;
+    if (color) {
+      background = color;
     } else {
-      let background;
-      if (color) {
-        background = color;
-      } else {
-        // pick a deterministic color from the list
-        let i = sumChars(name) % colors.length;
-        background = colors[i];
-      }
-
-      innerStyle.backgroundColor = background;
-
-      inner = abbr;
+      // pick a deterministic color from the list
+      let i = sumChars(name) % colors.length;
+      background = colors[i];
     }
+
+    innerStyle.backgroundColor = background;
+
+    inner = abbr;
 
     if (innerStyle.backgroundColor) {
       classes.push(`UserAvatar--${contrast(innerStyle.backgroundColor)}`);
